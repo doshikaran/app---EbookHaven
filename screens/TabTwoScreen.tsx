@@ -1,31 +1,31 @@
-import { StyleSheet } from 'react-native';
+import { View, Text, FlatList, SafeAreaView } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { useMyBooks } from "../context/MyBooks";
+import BookItem from "../components/BookItem";
+import { useNavigation } from "@react-navigation/native";
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-
-export default function TabTwoScreen() {
+const TabTwoScreen = () => {
+  const navigation = useNavigation();
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, []);
+  const { saved } = useMyBooks();
+  console.log("====================================");
+  console.log(saved);
+  console.log("====================================");
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+    <SafeAreaView className=" bg-black">
+    <View className=" bg-black h-full ">
+      <Text className=" mt-5 font-bold uppercase text-xl tracking-widest ml-7 text-white">my books</Text>
+      <FlatList
+        data={saved}
+        renderItem={({ item }) => <BookItem book={item} />}
+      />
     </View>
+    </SafeAreaView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+export default TabTwoScreen;
