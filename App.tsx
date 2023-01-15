@@ -12,7 +12,7 @@ const API_KEY =
 ""
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: "https://vernier.stepzen.net/api/dangling-angelfish/__graphql",
+  uri: "",
   headers: {
     Authorization: `Apikey ${API_KEY}`,
   },
